@@ -12,21 +12,26 @@ import UIKit
 // UIViewController super class from UIKit which understand and manipulate with all UI in the app
 
 class ViewController: UIViewController {
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
-    var flipCount = 0 {
+    // private jer je numberOfPairsOfCards usko vezan uz UI
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    var numberOfPairsOfCards: Int {
+            return (cardButtons.count + 1) / 2
+    }
+    // private(set) jer ne zelim da drugi set-iraju vrijednost
+    private(set) var flipCount = 0 {
         // didSet observeing flipCount and whet it changes, didSet will execute
         didSet {
             flipCountLabel.text = "Flips: \(flipCount)"
         }
     }
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet private weak var flipCountLabel: UILabel!
     
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
     
     
     // _ External name, sender internal name
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
          flipCount += 1
         if let cardNumber = cardButtons.firstIndex(of: sender) {
             game.chooseCard(at: cardNumber)
@@ -36,7 +41,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -50,11 +55,12 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["✝️", "✞", "✝︎", "☦︎", "♰", "😇", "😘", "🥶", "☀︎", "😎", "🙌", "💪"]
+    // mozda u buducnosti maknuti private kako bi izvana mogao specificirati koje slike se koriste
+    private var emojiChoices = ["✝️", "✞", "✝︎", "☦︎", "♰", "😇", "😘", "🥶", "☀︎", "😎", "🙌", "💪"]
     // deklariranje dictionarya
-    var emoji = [Int: String]()
+    private var emoji = [Int: String]()
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         // ugnjezdeni if odnojim zarezom i tako i citam slijedno, jednostavnije je
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
