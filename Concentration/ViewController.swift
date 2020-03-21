@@ -42,7 +42,7 @@ class ViewController: UIViewController {
             let card = game.cards[index]
             if card.isFaceUp {
                 button.setTitle(emoji(for: card), for: UIControl.State.normal)
-                button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                button.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             } else {
                 button.setTitle("", for: UIControl.State.normal)
                 button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0) : #colorLiteral(red: 0.6156862745, green: 0.1019607843, blue: 0.1019607843, alpha: 0.978702911)
@@ -50,7 +50,7 @@ class ViewController: UIViewController {
         }
     }
     
-    var emojiChoices = ["✝️", "✞", "✝︎", "☦︎", "♰", "😇",]
+    var emojiChoices = ["✝️", "✞", "✝︎", "☦︎", "♰", "😇", "😘", "🥶", "☀︎", "😎", "🙌", "💪"]
     // deklariranje dictionarya
     var emoji = [Int: String]()
     
