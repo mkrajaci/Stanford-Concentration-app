@@ -63,13 +63,25 @@ class ViewController: UIViewController {
     private func emoji(for card: Card) -> String {
         // ugnjezdeni if odnojim zarezom i tako i citam slijedno, jednostavnije je
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             // .remove koristim da makne emoji koji je koristio kako se on ne bi ponovio
-            emoji[card.identifier] = emojiChoices.remove(at: randomIndex)
+            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
         // vrati emoji[card.identifier] a ako je nil vrati ?
         return emoji[card.identifier] ?? "?"
     }
 
+}
+
+// dodajem Int-u metodu ili property
+extension Int {
+    var arc4random: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else {
+            return 0
+        }
+    }
 }
 
