@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Concentration {
+struct Concentration {
     // private(set) jer sam setiram podatak, drugi ga smiju samo pogledati (get)
     private(set) var cards = [Card]()
     
@@ -31,8 +31,8 @@ class Concentration {
             }
         }
     }
-    
-    func chooseCard(at index: Int) {
+    // mutating dodajem ispred funkcije jer sam clasu pretvorio u struct. Struct je reference type i funkcije trebaju biti mutable
+    mutating func chooseCard(at index: Int) {
         // assert is for debugging and testing purposes
         assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in the cards")
         if !cards[index].isFaceUp {
