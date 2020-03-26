@@ -58,16 +58,16 @@ class ViewController: UIViewController {
     // mozda u buducnosti maknuti private kako bi izvana mogao specificirati koje slike se koriste
     private var emojiChoices = ["✝️", "✞", "✝︎", "☦︎", "♰", "😇", "😘", "🥶", "☀︎", "😎", "🙌", "💪"]
     // deklariranje dictionarya
-    private var emoji = [Int: String]()
+    private var emoji = [Card:String]()
     
     private func emoji(for card: Card) -> String {
         // ugnjezdeni if odnojim zarezom i tako i citam slijedno, jednostavnije je
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
+        if emoji[card] == nil, emojiChoices.count > 0 {
             // .remove koristim da makne emoji koji je koristio kako se on ne bi ponovio
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
         }
         // vrati emoji[card.identifier] a ako je nil vrati ?
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 
 }
